@@ -20,9 +20,11 @@ class LoginScreen extends React.Component {
   };
   onButtonPress() {
     axios
-      .get("https://bokujo-rest-api.herokuapp.com/cows")
-      .then(response => this.setState({ cows: response.data }));
-    console.log(this.state.cows);
+      .post("https://bokujo-rest-api.herokuapp.com/register", {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => console.log(response));
   }
 
   render() {
