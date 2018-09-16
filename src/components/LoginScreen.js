@@ -2,22 +2,14 @@ import React from "react";
 import { View, AsyncStorage, StyleSheet, Text } from "react-native";
 import { TextInput, Button, Surface, withTheme } from "react-native-paper";
 import axios from "axios";
-class LoginScreen extends React.Component {
-  static navigationOptions = {
-    title: "Login"
-  };
+import { connect } from "react-redux";
+import { credentialUpdate, loginUser } from "../actions";
 
+class LoginScreen extends React.Component {
   state = {
-    username: "",
-    password: "",
     cows: ""
   };
 
-  handleChangeText = field => value => {
-    this.setState({
-      [field]: value
-    });
-  };
   onButtonPress() {
     axios
       .post("https://bokujo-rest-api.herokuapp.com/register", {
@@ -27,11 +19,14 @@ class LoginScreen extends React.Component {
       .then(response => console.log(response));
   }
 
+  onPress() {
+    const { username, password } = this.props;
+    this.props.loginUser({ username, password });
+  }
+
   render() {
     const { theme } = this.props;
     const { colors } = this.props.theme;
-
-    console.log(colors.secondary);
 
     return (
       <View
@@ -42,22 +37,26 @@ class LoginScreen extends React.Component {
             mode="outlined"
             style={styles.inputContainerStyle}
             label="Username"
-            value={this.state.username}
-            onChangeText={this.handleChangeText("username")}
+            value={this.props.username}
+            onChangeText={value =>
+              this.props.credentialUpdate({ prop: "username", value })
+            }
           />
           <TextInput
             mode="outlined"
             style={styles.inputContainerStyle}
             label="Password"
-            value={this.state.password}
-            onChangeText={this.handleChangeText("password")}
+            value={this.props.password}
+            onChangeText={value =>
+              this.props.credentialUpdate({ prop: "password", value })
+            }
             secureTextEntry
           />
           <Button
             style={{ margin: 10 }}
             mode="contained"
-            onPress={this.onButtonPress.bind(this)}
-            disabled={!this.state.username || !this.state.password}
+            onPress={this.onPress.bind(this)}
+            disabled={!this.props.username || !this.props.password}
           >
             Login
           </Button>
@@ -65,15 +64,16 @@ class LoginScreen extends React.Component {
       </View>
     );
   }
-
-  signInAsync = async () => {
-    await AsyncStorage.setItem("userToken", "abc");
-    await AsyncStorage.setItem("username", this.state.username);
-    this.props.navigation.navigate("App");
-  };
 }
+mapStateToProps = state => {
+  const { username, password } = state.auth;
+  return { username, password };
+};
 
-export default withTheme(LoginScreen);
+export default connect(
+  mapStateToProps,
+  { credentialUpdate, loginUser }
+)(withTheme(LoginScreen));
 
 const styles = StyleSheet.create({
   container: {
