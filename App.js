@@ -6,17 +6,21 @@ import {
   Provider as PaperProvider
 } from "react-native-paper";
 import LoginScreen from "./src/components/LoginScreen";
+import ReduxThunk from "redux-thunk";
+import reducers from "./src/reducers";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
 
 export default class App extends React.Component {
-  buttonPress() {
-    Alert.alert("string");
-  }
-
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
     return (
-      <PaperProvider>
-        <LoginScreen />
-      </PaperProvider>
+      <Provider store={store}>
+        <PaperProvider>
+          <LoginScreen />
+        </PaperProvider>
+      </Provider>
     );
   }
 }
