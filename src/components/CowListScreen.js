@@ -6,15 +6,18 @@ import { connect } from "react-redux";
 
 class CowListScreen extends React.Component {
   render() {
+    console.log(this.props);
     return (
-      <Button
-        style={{ margin: 10 }}
-        mode="contained"
-        // onPress={this.onPress.bind(this)}
-        // disabled={!this.props.username || !this.props.password}
-      >
-        Test
-      </Button>
+      <View>
+        <Button
+          style={{ margin: 10 }}
+          mode="contained"
+          // onPress={this.onPress.bind(this)}
+          // disabled={!this.props.username || !this.props.password}
+        >
+          Test
+        </Button>
+      </View>
     );
   }
 }

@@ -5,6 +5,7 @@ import {
   LOGIN_USER
 } from "./types";
 import axios from "axios";
+import { Actions } from "react-native-router-flux";
 
 export const credentialUpdate = ({ prop, value }) => {
   return {
@@ -21,7 +22,12 @@ export const loginUser = ({ username, password }) => {
         username: username,
         password: password
       })
-      .then(response => console.log(response.data))
+      .then(response => loginUserSuccess(dispatch, response))
       .catch(error => console.log(error));
   };
+};
+
+const loginUserSuccess = (dispatch, response) => {
+  dispatch({ type: LOGIN_USER_SUCCESS, payload: response.data });
+  Actions.main({ token: response.data });
 };

@@ -18,6 +18,8 @@ export default (state = INITIAL_STATE, action) => {
     case CREDENTIAL_UPDATE:
       console.log(action.payload.value);
       return { ...state, [action.payload.prop]: action.payload.value };
+    case LOGIN_USER_SUCCESS:
+      return { ...state, ...INITIAL_STATE, token: action.payload };
     default:
       return state;
   }
