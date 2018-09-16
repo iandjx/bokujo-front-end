@@ -6,19 +6,6 @@ import { connect } from "react-redux";
 import { credentialUpdate, loginUser } from "../actions";
 
 class LoginScreen extends React.Component {
-  state = {
-    cows: ""
-  };
-
-  onButtonPress() {
-    axios
-      .post("https://bokujo-rest-api.herokuapp.com/register", {
-        username: this.state.username,
-        password: this.state.password
-      })
-      .then(response => console.log(response));
-  }
-
   onPress() {
     const { username, password } = this.props;
     this.props.loginUser({ username, password });
@@ -27,10 +14,10 @@ class LoginScreen extends React.Component {
   render() {
     const { theme } = this.props;
     const { colors } = this.props.theme;
-
+    // console.log(this.props);
     return (
       <View
-        style={[styles.container, { backgroundColor: theme.colors.secondary }]}
+        style={[styles.container, { backgroundColor: theme.colors.background }]}
       >
         <Surface style={styles.surfaceStyle}>
           <TextInput

@@ -1,15 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, Alert } from "react-native";
-import {
-  Button,
-  DefaultTheme,
-  Provider as PaperProvider
-} from "react-native-paper";
-import LoginScreen from "./src/components/LoginScreen";
+import { Provider as PaperProvider } from "react-native-paper";
 import ReduxThunk from "redux-thunk";
 import reducers from "./src/reducers";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+import Router from "./src/Router";
 
 export default class App extends React.Component {
   render() {
@@ -18,18 +13,9 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <PaperProvider>
-          <LoginScreen />
+          <Router />
         </PaperProvider>
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
