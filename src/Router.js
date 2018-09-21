@@ -2,7 +2,6 @@ import React from "react";
 import { Scene, Router, Actions } from "react-native-router-flux";
 import LoginScreen from "./components/LoginScreen";
 import CowListScreen from "./components/CowListScreen";
-
 const RouterComponent = () => {
   return (
     <Router>
@@ -16,7 +15,7 @@ const RouterComponent = () => {
           />
         </Scene>
         <Scene key="main">
-          <Scene key="cowList" component={CowListScreen} initial />
+          <Scene key="cowListScreen" component={CowListScreen} initial />
         </Scene>
       </Scene>
     </Router>

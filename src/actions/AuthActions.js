@@ -30,4 +30,5 @@ export const loginUser = ({ username, password }) => {
 const loginUserSuccess = (dispatch, response) => {
   dispatch({ type: LOGIN_USER_SUCCESS, payload: response.data });
   Actions.main({ token: response.data });
+  // Actions.main();
 };
