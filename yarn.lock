@@ -5692,6 +5692,10 @@ react-native-maps@0.21.0:
     babel-plugin-module-resolver "^2.3.0"
     babel-preset-react-native "1.9.0"
 
+react-native-material-initials@^0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/react-native-material-initials/-/react-native-material-initials-0.0.12.tgz#ba84933c7d19ede4337ab57a1858fb2714803749"
+
 react-native-paper@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-2.0.1.tgz#0221ead52e35811ca6d2ce41cf069d424fe92bcf"

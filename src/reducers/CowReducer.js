@@ -19,8 +19,6 @@ export default (state = INITIAL_STATE, action) => {
         isFetching: true
       };
     case FETCHING_COWS_SUCCESS:
-      console.log("reducing", action.data.cows);
-
       return {
         ...state,
         isFetching: false,

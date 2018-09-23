@@ -6,7 +6,14 @@ import {
   Text,
   FlatList
 } from "react-native";
-import { TextInput, Button, withTheme, List } from "react-native-paper";
+import {
+  TextInput,
+  Button,
+  withTheme,
+  List,
+  Card,
+  Title
+} from "react-native-paper";
 import { connect } from "react-redux";
 // import { cowFetch, getCows } from "../actions";
 import { bindActionCreators } from "redux";
@@ -15,27 +22,28 @@ import { fetchCowsFromAPI } from "../actions";
 import ListItem from "./ListItem";
 
 class CowListScreen extends React.Component {
+  componentWillMount() {
+    this.props.fetchCowsFromAPI();
+  }
   render() {
     // const { container, text, button, buttonText } = this.styles;
     const { cows, isFetching } = this.props.cows;
     console.log(this.props);
     return (
-      <View style={styles.container}>
-        <Text>Redux Example</Text>
-        <TouchableHighlight onPress={() => this.props.fetchCowsFromAPI()}>
-          <Text>Load People</Text>
-        </TouchableHighlight>
-        {isFetching && <Text>Loading</Text>}
-        {cows.length
-          ? cows.map((cow, i) => {
-              return (
-                <View key={i}>
-                  <Text>Name: {cow.private_id}</Text>
-                  <Text>Birth Year: {cow.heredity}</Text>
-                </View>
-              );
-            })
-          : null}
+      <View>
+        <FlatList
+          data={cows}
+          renderItem={({ item }) => <ListItem cow={item} />}
+          keyExtractor={item => item.pub_id}
+        />
+
+        <Card>
+          <Card.Content>
+            <Title>Test</Title>
+
+            <Text>text</Text>
+          </Card.Content>
+        </Card>
       </View>
     );
   }
