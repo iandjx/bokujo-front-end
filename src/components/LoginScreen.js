@@ -4,6 +4,7 @@ import { TextInput, Button, Surface, withTheme } from "react-native-paper";
 import axios from "axios";
 import { connect } from "react-redux";
 import { credentialUpdate, loginUser } from "../actions";
+import { Spinner } from "./common/Spinner";
 
 class LoginScreen extends React.Component {
   onPress() {
@@ -11,10 +12,25 @@ class LoginScreen extends React.Component {
     this.props.loginUser({ username, password });
   }
 
+  renderButton() {
+    if (this.props.loading) {
+      return <Spinner size="large" />;
+    }
+    return (
+      <Button
+        style={{ margin: 10 }}
+        mode="contained"
+        onPress={this.onPress.bind(this)}
+        disabled={!this.props.username || !this.props.password}
+      >
+        Login
+      </Button>
+    );
+  }
   render() {
     const { theme } = this.props;
     const { colors } = this.props.theme;
-    // console.log(this.props);
+    console.log(this.props);
     return (
       <View
         style={[styles.container, { backgroundColor: theme.colors.background }]}
@@ -39,22 +55,15 @@ class LoginScreen extends React.Component {
             }
             secureTextEntry
           />
-          <Button
-            style={{ margin: 10 }}
-            mode="contained"
-            onPress={this.onPress.bind(this)}
-            disabled={!this.props.username || !this.props.password}
-          >
-            Login
-          </Button>
+          {this.renderButton()}
         </Surface>
       </View>
     );
   }
 }
 mapStateToProps = state => {
-  const { username, password } = state.auth;
-  return { username, password };
+  const { username, password, error, loading } = state.auth;
+  return { username, password, error, loading };
 };
 
 export default connect(

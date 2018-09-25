@@ -20,6 +20,15 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, [action.payload.prop]: action.payload.value };
     case LOGIN_USER_SUCCESS:
       return { ...state, ...INITIAL_STATE, token: action.payload };
+    case LOGIN_USER:
+      return { ...state, loading: true, error: "" };
+    case LOGIN_USER_FAIL:
+      return {
+        ...state,
+        error: "Authentication Failed",
+        password: "",
+        loading: "false"
+      };
     default:
       return state;
   }
