@@ -12,15 +12,14 @@ import {
   withTheme,
   List,
   Card,
-  Title,
-  FAB,
-  Portal
+  Title
 } from "react-native-paper";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchCowsFromAPI } from "../actions";
 import { Header } from "./common/Header";
 import ListItem from "./common/ListItem";
+import { FloatingAction } from "react-native-floating-action";
 
 class CowListScreen extends React.Component {
   componentWillMount() {
@@ -34,7 +33,7 @@ class CowListScreen extends React.Component {
     const { cows, isFetching } = this.props.cows;
     console.log(this.props);
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <Header title="Cow List" />
         <List.Accordion
           title="Accordion"
@@ -48,9 +47,10 @@ class CowListScreen extends React.Component {
           renderItem={({ item }) => <ListItem cow={item} />}
           keyExtractor={item => item.pub_id}
         />
-        <Portal>
-          <Text>This is rendered at a different place</Text>
-        </Portal>
+        <FloatingAction
+          position="right"
+          onPressMain={console.log("FAB pressed")}
+        />
       </View>
     );
   }
@@ -73,6 +73,12 @@ const styles = {
   },
   buttonText: {
     color: "white"
+  },
+  fab: {
+    justifyContent: "center",
+    position: "absolute",
+    bottom: 20,
+    right: 20
   }
 };
 
