@@ -1,12 +1,21 @@
-import * as React from "react";
-import { List } from "react-native-paper";
+import { List, Divider } from "react-native-paper";
+import React, { Component } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { Actions } from "react-native-router-flux";
 
-const MyComponent = () => (
-  <List.Item
-    title="First Item"
-    description="Item description"
-    right={props => <List.Icon {...props} icon="folder" />}
-  />
-);
+class ListItem extends Component {
+  render() {
+    const { private_id } = this.props.cow;
+    return (
+      <TouchableOpacity>
+        <List.Item
+          title={private_id}
+          // right={props => <List.Icon {...props} icon="arrow_right" />}
+        />
+        <Divider />
+      </TouchableOpacity>
+    );
+  }
+}
 
-export default MyComponent;
+export default ListItem;

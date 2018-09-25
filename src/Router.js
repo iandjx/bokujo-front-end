@@ -14,7 +14,7 @@ const RouterComponent = () => {
             initial
           />
         </Scene>
-        <Scene key="main">
+        <Scene key="main" hideNavBar>
           <Scene key="cowListScreen" component={CowListScreen} initial />
         </Scene>
       </Scene>
