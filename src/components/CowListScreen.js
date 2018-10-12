@@ -20,6 +20,7 @@ import { fetchCowsFromAPI } from "../actions";
 import { Header } from "./common/Header";
 import ListItem from "./common/ListItem";
 import { FloatingAction } from "react-native-floating-action";
+import { Actions } from "react-native-router-flux";
 
 class CowListScreen extends React.Component {
   componentWillMount() {
@@ -47,10 +48,7 @@ class CowListScreen extends React.Component {
           renderItem={({ item }) => <ListItem cow={item} />}
           keyExtractor={item => item.pub_id}
         />
-        <FloatingAction
-          position="right"
-          onPressMain={console.log("FAB pressed")}
-        />
+        <FloatingAction position="right" onPressMain={Actions.addEventScreen} />
       </View>
     );
   }
